@@ -20,6 +20,8 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         python-pip \
         python-tk \
         curl \
+        ssh \
+        openssh-client \
         iproute2 \
         iputils-ping \
         mininet \
@@ -28,6 +30,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         vim \
         x11-xserver-utils \
         xterm \
+        python3 \
         && rm -rf /var/lib/apt/lists/* \
         && mkdir -p /mnscripts \
         && pip install setuptools \
@@ -37,4 +40,5 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         #&& ./configure \
         #&& make && make install
 WORKDIR /mnscripts
-EXPOSE 6633 6653 6640
+#EXPOSE 6633 6653 6640 8080
+EXPOSE 8080
