@@ -5,7 +5,6 @@ FROM ${BASE_IMAGE}
 USER root
 WORKDIR /root
 
-
 #RUN apt-get update && apt-get install -y --no-install-recommends gpg
 #RUN echo deb http://linux.dell.com/repo/community/ubuntu xenial openmanage > /etc/apt/sources.list.d/linux.dell.com.sources.list \
 #RUN gpg --keyserver hkp://pool.sks-keyservers.net:80 --recv-key 1285491434D8786F
@@ -35,10 +34,11 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         && mkdir -p /mnscripts \
         && pip install setuptools \
         && pip install bottle
-        #&& chmod +x boot.sh \
+        ##&& chmod +x /start.sh \
         #&& ./boot.sh \
         #&& ./configure \
         #&& make && make install
 WORKDIR /mnscripts
 #EXPOSE 6633 6653 6640 8080
 EXPOSE 8080
+CMD ["sh","start.sh"]
