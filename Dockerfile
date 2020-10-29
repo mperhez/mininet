@@ -11,8 +11,11 @@ WORKDIR /root
 #RUN gpg -a --export 1285491434D8786F > dellkeys
 #RUN apt-key add dellkeys
 RUN apt-get update && apt-get install -y --no-install-recommends \
-        #git automake autoconf gcc uml-utilities libtool build-essential git pkg-config linux-headers-4.15.0-1059-oem \
+        sudo \
+        patch \
         git \
+        && git clone git://github.com/mininet/mininet \
+        && apt-get install -y --no-install-recommends \
         gpg \
         openvswitch-switch \
         openvswitch-testcontroller \
@@ -23,21 +26,18 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         openssh-client \
         iproute2 \
         iputils-ping \
-        mininet \
+#        mininet \
         net-tools \
         tcpdump \
-        vim \
+        #vim \
         x11-xserver-utils \
         xterm \
         python3 \
-        && rm -rf /var/lib/apt/lists/* \
+        && ./mininet/util/install.sh -nfv \
         && mkdir -p /mnscripts \
         && pip install setuptools \
-        && pip install bottle
-        ##&& chmod +x /start.sh \
-        #&& ./boot.sh \
-        #&& ./configure \
-        #&& make && make install
+        && pip install bottle \
+        && rm -rf /var/lib/apt/lists/*
 WORKDIR /mnscripts
 EXPOSE 9081
 CMD ["sh","start.sh"]
