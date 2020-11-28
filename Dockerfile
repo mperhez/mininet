@@ -13,6 +13,7 @@ WORKDIR /root
 RUN apt-get update && apt-get install -y --no-install-recommends \
         sudo \
         patch \
+        wget \
         git \
         && git clone git://github.com/mininet/mininet \
         && alias python='/usr/bin/python3' \
