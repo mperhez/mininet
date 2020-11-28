@@ -15,6 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         patch \
         git \
         && git clone git://github.com/mininet/mininet \
+        && alias python='/usr/bin/python3' \
         && apt-get install -y --no-install-recommends \
         gpg \
         openvswitch-switch \
@@ -36,7 +37,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
         && ./mininet/util/install.sh -nfv \
         && mkdir -p /mnscripts \
         && pip install setuptools \
-        && pip install bottle \
+        && wget http://bottlepy.org/bottle.py -P /usr/local/bin/ \
         && rm -rf /var/lib/apt/lists/*
 WORKDIR /mnscripts
 EXPOSE 9081
